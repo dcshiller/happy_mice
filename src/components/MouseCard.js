@@ -5,17 +5,18 @@ import deadMouseImage from "../images/deadmouse.png";
 
 const CardBox = styled.div`
   border: 2px solid darkgrey;
-  width: 10rem;
+  width: 8rem;
   padding: 1rem;
   margin: 1em;
   position: relative;
   box-shadow: 5px 5px 10px black;
   border-radius: 10px;
-  background: ${p => p.living || "lightgrey"};
+  background: ${p => p.living ? "white" : "lightgrey"};
 `;
 
 const CardHeader = styled.div`
   position: absolute;
+  font-weight: bold;
   top: 0;
   left: 50%;
 `;
@@ -25,12 +26,14 @@ const ImageBox = styled.div`
   height: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
 `;
 
 const Image = styled.img`
-  width: ${p => 30 + (Math.min(p.age, 5) * 10)}%;
+  width: 100%;
+  max-width: ${p => 30 + (Math.min(p.age, 5) * 10)}%;
+  transition: ${p => p.alive && "max-width 3s"};
 `;
 
 const Bar = styled.div`
@@ -61,7 +64,7 @@ const MouseCard = (props) => {
     <CardBox living={mouse.alive}>
       <CardHeader>{mouse.id}</CardHeader>
       <ImageBox>
-        <Image src={mouse.alive ? mouseImage : deadMouseImage} age={mouse.age} />
+        <Image src={mouse.alive ? mouseImage : deadMouseImage} alive={mouse.alive} age={mouse.age} />
       </ImageBox>
       <br/>
       <span> Age: {mouse.age}</span>

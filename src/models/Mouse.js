@@ -13,17 +13,22 @@ export default class Mouse {
     this.age++;
   }
 
-  feed(food){
+  feedFirst(food){
     if (food.amount === 0) {
       if (this.robustness < 3) { this.die(); }
       this.robustness--;
       this.utility--;
       return;
-    } else if (food.amount > 1) {
-      this.robustness < 10 && this.robustness++;
-      food.amount--;
-      this.utility++;
-    };
+    }
+    food.amount--;
+    this.utility++;
+  }
+
+  feedSecond(food){
+    if (food.amount === 0) {
+      return;
+    }
+    this.robustness < 10 && this.robustness++;
     food.amount--;
     this.utility++;
   }

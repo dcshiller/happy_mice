@@ -9,6 +9,7 @@ import styled from "styled-components";
 
 const SiteTitle = styled.h1`
   text-align: center;
+  color: white;
   grid-column-start: 0;
   grid-column-end: 3;
 `;
@@ -16,7 +17,11 @@ const SiteTitle = styled.h1`
 const Grid = styled.div`
   grid-template-columns: 30% 50% 20%;
   display: grid;
+  grid-row-gap: 3em;
+  grid-column-gap: 1em;
   width: 100vw;
+  max-width: 800px;
+  margin: auto;
 `;
 
 export default class IndexPage extends React.Component {
@@ -26,6 +31,12 @@ export default class IndexPage extends React.Component {
     this.game = new Game();
     clock.onTick(this.advance.bind(this));
     clock.start();
+    document.addEventListener("keyup", (e) => {
+      if (e.keyCode == 32){
+        if (this.state.paused) { clock.start(); this.setState({ paused: false }); }
+        else { clock.stop(); this.setState({ paused: true }); }
+      }
+    });
     this.pause = () => { this.setState({paused: true }); };
     this.unpause = () => { this.setState({paused: false }); };
   }
@@ -33,6 +44,7 @@ export default class IndexPage extends React.Component {
   render() {
     return (
       <Grid>
+        <style dangerouslySetInnerHTML={{__html: "body { background: darkgrey; }"}}/>
         <SiteTitle>Happy Mice</SiteTitle>
         <StatCard game={this.game} time={clock.time} />
         <Clock clock={clock} time={clock.time} running={clock.isRunning()} pause={this.pause} unpause={this.unpause} />

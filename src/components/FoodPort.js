@@ -1,16 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import grainImage from "../images/grain.jpg";
+import { StyledSectionTitle, TabRow, Container } from "./StyledTitles";
 
 const StyledFoodPort = styled.div`
+  border: 2px solid grey;
+  background: ivory;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 4;
   padding: 3rem;
   position: relative;
-  overflow: hidden;
 `;
+
+const HideOverflow = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+`
 
 const FoodPyramid = styled.div`
   background: yellow;
@@ -26,18 +37,30 @@ const FoodPyramid = styled.div`
 
 const AddFoodButton = styled.button`
   background: yellow;
-  border: 2px solid tan;
+  border: 3px solid tan;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: black;
   position: absolute;
-  top: 2rem;
+  bottom: 1rem;
   left: 50%;
+  padding: .5em;
   transform: translateX(-50%);
+  z-index: 20;
 `;
 
 const FoodPort = (props) => {
   return (
     <StyledFoodPort>
-      <AddFoodButton onClick={props.addFood}>Add Food</AddFoodButton>
+      <TabRow>
+        <Container>
+          <StyledSectionTitle> Pantry </StyledSectionTitle>
+        </Container>
+      </TabRow>
+      <HideOverflow>
+      <AddFoodButton onClick={props.addFood}>Feed Mice</AddFoodButton>
       <FoodPyramid amount={props.food} />
+    </HideOverflow>
     </StyledFoodPort>
   )
 }

@@ -26,9 +26,14 @@ export default class Colony {
       mouse.growOlder();
     }
   }
+
   feedMice(food) {
     for (const mouse of this.randomizeLivingMice()) {
-      mouse.feed(food);
+      mouse.feedFirst(food);
+    }
+
+    for (const mouse of this.randomizeLivingMice()) {
+      if (Math.random() > 0.5) mouse.feedSecond(food);
     }
   }
 
