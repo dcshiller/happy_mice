@@ -9,6 +9,10 @@ export default class Mouse {
     this.utility = 0;
   }
 
+  growOlder() {
+    this.age++;
+  }
+
   feed(food){
     if (food.amount === 0) {
       if (this.robustness < 3) { this.die(); }

@@ -1,6 +1,7 @@
 import Mouse from "./Mouse";
 
 const living = (arr) => arr.filter(m => m.alive);
+const dead = (arr) => arr.filter(m => !m.alive);
 const shuffle = (array) => {
   const dup = [...array];
   for (let i = array.length - 1; i > 0; i--) {
@@ -9,6 +10,7 @@ const shuffle = (array) => {
   }
   return dup;
 }
+
 export default class Colony {
   constructor(){
     this.mice = [new Mouse(), new Mouse()];
@@ -19,6 +21,11 @@ export default class Colony {
     return randomizedMice;
   }
 
+  ageMice() {
+    for (const mouse of living(this.mice)) {
+      mouse.growOlder();
+    }
+  }
   feedMice(food) {
     for (const mouse of this.randomizeLivingMice()) {
       mouse.feed(food);
@@ -33,6 +40,14 @@ export default class Colony {
   }
 
   allUtility() {
-    return this.mice.reduce(a => a.utility);
+    return this.mice.reduce((accum, nextM) => accum + nextM.utility, 0);
+  }
+
+  livingMice() {
+    return living(this.mice);
+  }
+
+  deadMice() {
+    return dead(this.mice);
   }
 }
