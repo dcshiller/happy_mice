@@ -27,16 +27,19 @@ const FoodPyramid = styled.div`
   background: yellow;
   background-image: url(${grainImage});
   border: 2px solid tan;
-  width: ${p => Math.sqrt(p.amount) * 15}px;
-  height: ${p => Math.sqrt(p.amount) * 15}px;
+  width: 1000px;
+  height: 1000px;
+  max-width: ${p => Math.sqrt(p.amount) * 15}px;
+  max-height: ${p => Math.sqrt(p.amount) * 15}px;
   transform: translateY(60%) translateX(-50%) rotate(45deg);
+  transition: max-width 1s, max-height 1s;
   position: absolute;
   bottom: 0;
   left: 50%;
 `;
 
 const AddFoodButton = styled.button`
-  background: yellow;
+  background: radial-gradient(yellow, yellow, khaki);
   border: 3px solid tan;
   font-weight: bold;
   font-size: 1.1em;
@@ -47,6 +50,7 @@ const AddFoodButton = styled.button`
   padding: .5em;
   transform: translateX(-50%);
   z-index: 20;
+  cursor: pointer;
 `;
 
 const FoodPort = (props) => {

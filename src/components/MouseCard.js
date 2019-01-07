@@ -33,7 +33,7 @@ const ImageBox = styled.div`
 const Image = styled.img`
   width: 100%;
   max-width: ${p => 30 + (Math.min(p.age, 5) * 10)}%;
-  transition: ${p => p.alive && "max-width 3s"};
+  transition: ${p => p.alive && "max-width 2s"};
 `;
 
 const Bar = styled.div`
@@ -44,7 +44,7 @@ const Bar = styled.div`
     if (p.length < 6) return "orange";
     return "green";
   }};
-  width: ${p => p.length * 7}px;
+  width: ${p => p.length * 5}px;
 `;
 
 const Heartbar = styled.div`
@@ -55,7 +55,7 @@ const Heartbar = styled.div`
     if (p.length < 3) return "#9acd32 ";
     return "green";
   }};
-  width: ${p => p.length * 7}px;
+  width: ${p => p.length * 5}px;
 `;
 
 const MouseCard = (props) => {
