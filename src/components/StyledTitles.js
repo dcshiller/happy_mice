@@ -5,6 +5,7 @@ export const StyledSectionTitle = styled.div`
   font-size: 1.5em;
   font-weight: bold;
   color: white;
+  text-shadow: 1px 1px grey;
   display: block;
   position: absolute;
   left: 50%;
@@ -15,6 +16,7 @@ export const StyledSectionTitle = styled.div`
 export const TabRow = styled.div`
   position: absolute;
   top: 0;
+  left: 0;
   transform: translateY(-100%);
   min-height: 1.5em;
   width: 100%;

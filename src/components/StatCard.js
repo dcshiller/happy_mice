@@ -40,6 +40,7 @@ const StatCard = (props) => {
       <SubStat><StatName>Total:</StatName> {game.utility()}</SubStat>
       <SubStat><StatName>Per Second:</StatName> {game.averageTimeUtility(props.time)}</SubStat>
       <SubStat><StatName>Per Mouse:</StatName> {game.averageMouseUtility()}</SubStat>
+      <SubStat><StatName>10, 50, 90%:</StatName> {game.medianMouseUtility(0.1)}, {game.medianMouseUtility(0.5)}, {game.medianMouseUtility(0.9)} </SubStat>
       <br/>
       <Stat><StatName>Mice</StatName></Stat>
       <SubStat><StatName>Alive:</StatName> {game.colony.livingMice().length}</SubStat>

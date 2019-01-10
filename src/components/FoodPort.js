@@ -39,7 +39,7 @@ const FoodPyramid = styled.div`
 `;
 
 const AddFoodButton = styled.button`
-  background: radial-gradient(yellow, yellow, khaki);
+  background: ${p => p.disabled ? "lightgrey" : "radial-gradient(yellow, yellow, khaki)"};
   border: 3px solid tan;
   font-weight: bold;
   font-size: 1.1em;
@@ -50,6 +50,7 @@ const AddFoodButton = styled.button`
   padding: .5em;
   transform: translateX(-50%);
   z-index: 20;
+  outline: none;
   cursor: pointer;
 `;
 
@@ -62,7 +63,7 @@ const FoodPort = (props) => {
         </Container>
       </TabRow>
       <HideOverflow>
-      <AddFoodButton onClick={props.addFood}>Feed Mice</AddFoodButton>
+      <AddFoodButton disabled={props.disabled} onClick={!props.disabled && props.addFood}>Feed Mice</AddFoodButton>
       <FoodPyramid amount={props.food} />
     </HideOverflow>
     </StyledFoodPort>

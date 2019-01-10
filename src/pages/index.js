@@ -10,8 +10,24 @@ import styled from "styled-components";
 const SiteTitle = styled.h1`
   text-align: center;
   color: white;
+  text-shadow: 1px 1px grey;
   grid-column-start: 0;
   grid-column-end: 3;
+`;
+
+const ResetButton = styled.button`
+  border: none;
+  background: none;
+  text-shadow: ${p => !p.over && "1px 1px grey"};
+  color: ${p => p.over ? "darkred" : "lightgrey"};
+  outline: none;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  transition: color .3s;
+  &:hover {
+    color: ${p => p.over ? "#B01212" : "white"};
+  }
 `;
 
 const Grid = styled.div`
@@ -45,15 +61,21 @@ export default class IndexPage extends React.Component {
     return (
       <Grid>
         <style dangerouslySetInnerHTML={{__html: "body { background: darkgrey; }"}}/>
-        <SiteTitle>Happy Mice</SiteTitle>
+        <SiteTitle>Happy Mice
+        <ResetButton over={this.game.colony.livingMice().length === 0} onClick={this.reset.bind(this)}>(Reset)</ResetButton>
+        </SiteTitle>
         <StatCard game={this.game} time={clock.time} />
         <Clock clock={clock} time={clock.time} running={clock.isRunning()} pause={this.pause} unpause={this.unpause} />
-        <FoodPort food={this.game.food.amount} addFood={this.game.addFood}/>
+        <FoodPort food={this.game.food.amount} addFood={this.game.addFood} disabled={!clock.isRunning()}/>
         <MouseBox colony={this.game.colony} />
       </Grid>
     );
   }
 
+  reset() {
+    this.game = new Game();
+    clock.reset();
+  }
   advance() {
     this.game.tick();
     this.setState({time: clock.time});

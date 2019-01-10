@@ -19,12 +19,13 @@ const CardBox = styled.div`
 const Time = styled.div`
   font-size: 2em;
   font-weight: bold;
+  color: ${p => p.running || "ivory" };
   margin: auto;
   text-align: center;
 `;
 
 const Instructions = styled.div`
-  color: ${p => p.running ? "grey" : "white"};
+  color: ${p => p.running ? "grey" : "ivory"};
   font-size: .8em;
   width: auto;
   text-align: center;
@@ -49,7 +50,7 @@ const Clock = (props) => {
           <StyledSectionTitle> Clock </StyledSectionTitle>
         </Container>
       </TabRow>
-      <Time>{displayTime(props.clock.time)}</Time>
+      <Time running={props.running}>{displayTime(props.clock.time)}</Time>
       <br/>
       <Instructions running={props.running} >(<em>click or space to {props.running ? "pause" : "unpause"}</em>)</Instructions>
     </CardBox>

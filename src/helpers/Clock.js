@@ -21,6 +21,10 @@ clock.toggle = () => {
   clock.isRunning() ? clock.stop() : clock.start();
 }
 
+clock.reset = () => {
+  clock.time = 0;
+}
+
 const tickClock = () => { clock.time++; clock.funcToCall() };
 
 

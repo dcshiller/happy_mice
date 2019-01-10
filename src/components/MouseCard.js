@@ -9,7 +9,7 @@ const CardBox = styled.div`
   padding: 1rem;
   margin: 1em;
   position: relative;
-  box-shadow: 5px 5px 10px black;
+  box-shadow: 5px 5px 4px rgba(0,0,0,.3);
   border-radius: 10px;
   background: ${p => p.living ? "white" : "lightgrey"};
 `;
@@ -32,8 +32,9 @@ const ImageBox = styled.div`
 
 const Image = styled.img`
   width: 100%;
+  background: ${p => p.color};
   max-width: ${p => 30 + (Math.min(p.age, 5) * 10)}%;
-  transition: ${p => p.alive && "max-width 2s"};
+  transition: ${p => p.alive && "max-width 2s, background 1s"};
 `;
 
 const Bar = styled.div`
@@ -44,7 +45,8 @@ const Bar = styled.div`
     if (p.length < 6) return "orange";
     return "green";
   }};
-  width: ${p => p.length * 5}px;
+  transition: background .3s;
+  width: ${p => p.length * 4.5}px;
 `;
 
 const Heartbar = styled.div`
@@ -55,6 +57,7 @@ const Heartbar = styled.div`
     if (p.length < 3) return "#9acd32 ";
     return "green";
   }};
+  transition: background .3s;
   width: ${p => p.length * 5}px;
 `;
 
@@ -64,10 +67,10 @@ const MouseCard = (props) => {
     <CardBox living={mouse.alive}>
       <CardHeader>{mouse.id}</CardHeader>
       <ImageBox>
-        <Image src={mouse.alive ? mouseImage : deadMouseImage} alive={mouse.alive} age={mouse.age} />
+        <Image src={mouse.alive ? mouseImage : deadMouseImage} color={mouse.age < 1 ? "#FEC3A6" : mouse.color} alive={mouse.alive} age={mouse.age} />
       </ImageBox>
       <br/>
-      <span> Age: {mouse.age}</span>
+      <span> Age: {mouse.age} week{mouse.age !== 1 && "s"}</span>
       <br/>
       <span> Robustness: <Bar length={mouse.robustness} /> </span>
       <br/>

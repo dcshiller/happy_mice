@@ -55,4 +55,8 @@ export default class Colony {
   deadMice() {
     return dead(this.mice);
   }
+
+  orderedByUtility() {
+    return [...this.mice].sort((a, b) => (a.utility < b.utility) && -1);
+  }
 }

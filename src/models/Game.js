@@ -10,7 +10,7 @@ export default class Game {
   tick() {
     this.colony.ageMice();
     this.colony.feedMice(this.food);
-    this.colony.breedMice();
+    if (!window.location.search.includes("megan")) this.colony.breedMice();
   }
 
   utility() {
@@ -23,5 +23,10 @@ export default class Game {
 
   averageMouseUtility() {
     return Math.floor(this.colony.allUtility() / this.colony.mice.length);
+  }
+
+  medianMouseUtility(percent) {
+    const sorted = this.colony.orderedByUtility();
+    return sorted[Math.floor(sorted.length * percent)].utility;
   }
 }
