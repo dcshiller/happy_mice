@@ -5,7 +5,7 @@ import deadMouseImage from "../images/deadmouse.png";
 
 const CardBox = styled.div`
   border: 2px solid darkgrey;
-  width: 8rem;
+  width: 8em;
   padding: 1rem;
   margin: 1em;
   position: relative;
@@ -34,7 +34,7 @@ const Image = styled.img`
   width: 100%;
   background: ${p => p.color};
   max-width: ${p => 30 + (Math.min(p.age, 5) * 10)}%;
-  transition: ${p => p.alive && "max-width 2s, background 1s"};
+  transition: ${p => p.alive && "max-width 3s, background 1s"};
 `;
 
 const Bar = styled.div`

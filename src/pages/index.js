@@ -13,13 +13,26 @@ const SiteTitle = styled.h1`
   text-shadow: 1px 1px grey;
   grid-column-start: 0;
   grid-column-end: 3;
+  font-family: 'Coiny', cursive;
+`;
+
+const About = styled.div`
+  position: fixed;
+  width: 500px;
+  background: white;
+  border: 2px solid tan;
+  left: calc(50vw - 250px);
+  top: calc(50vh - 150px);
+  height: 300px;
+  z-index: 21;
 `;
 
 const ResetButton = styled.button`
   border: none;
   background: none;
   text-shadow: ${p => !p.over && "1px 1px grey"};
-  color: ${p => p.over ? "darkred" : "lightgrey"};
+  color: ${p => p.over ? "scarlet" : "lightgrey"};
+  font-weight: ${p => p.over && "bold"};
   outline: none;
   cursor: pointer;
   display: block;
@@ -31,19 +44,21 @@ const ResetButton = styled.button`
 `;
 
 const Grid = styled.div`
-  grid-template-columns: 30% 50% 20%;
+  color: rgb(40,40,40);
+  grid-template-columns: 30% 40% 30%;
   display: grid;
   grid-row-gap: 3em;
   grid-column-gap: 1em;
   width: 100vw;
   max-width: 800px;
   margin: auto;
+  box-sizing: border-box;
 `;
 
 export default class IndexPage extends React.Component {
   constructor() {
     super();
-    this.state = { time: 0, paused: false };
+    this.state = { time: 0, paused: false, modal: true };
     this.game = new Game();
     clock.onTick(this.advance.bind(this));
     clock.start();
@@ -55,14 +70,23 @@ export default class IndexPage extends React.Component {
     });
     this.pause = () => { this.setState({paused: true }); };
     this.unpause = () => { this.setState({paused: false }); };
+    this.hideModal = () => { this.setState({ modal: false})};
+    this.showModal = () => { this.setState({ modal: true})};
   }
 
   render() {
     return (
       <Grid>
+        <link href="https://fonts.googleapis.com/css?family=Coiny|ZCOOL+QingKe+HuangYou" rel="stylesheet"/>
+        <About hidden={!this.state.modal}>
+          <SiteTitle style={{ color: "black" }}> Happy Mice </SiteTitle>
+          <p>A Game of Wild Animal Suffering and Population Ethics</p>
+          <button onClick={this.hideModal}> close </button>
+        </About>
         <style dangerouslySetInnerHTML={{__html: "body { background: darkgrey; }"}}/>
         <SiteTitle>Happy Mice
         <ResetButton over={this.game.colony.livingMice().length === 0} onClick={this.reset.bind(this)}>(Reset)</ResetButton>
+        <button onClick={this.showModal}> menu </button>
         </SiteTitle>
         <StatCard game={this.game} time={clock.time} />
         <Clock clock={clock} time={clock.time} running={clock.isRunning()} pause={this.pause} unpause={this.unpause} />

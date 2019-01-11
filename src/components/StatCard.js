@@ -6,7 +6,7 @@ import { StyledSectionTitle, TabRow, Container } from "./StyledTitles";
 const CardBox = styled.div`
   border: 2px solid grey;
   background: ivory;
-  width: 10rem;
+  width: calc(100% - 2em);
   padding: 1rem;
   position: relative;
   grid-column-start: 3;

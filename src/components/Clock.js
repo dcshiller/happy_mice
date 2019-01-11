@@ -5,7 +5,7 @@ import { StyledSectionTitle, TabRow, Container } from "./StyledTitles";
 const CardBox = styled.div`
   border: 2px solid grey;
   background: ${p => p.running ? "ivory" : "salmon" };
-  width: 10rem;
+  width: calc(100% - 2rem);
   padding: 1rem;
   position: relative;
   grid-column-start: 3;
@@ -13,12 +13,14 @@ const CardBox = styled.div`
   grid-row-start: 2;
   grid-row-end: 2;
   cursor: pointer;
+  transition: background .3s;
 `;
 
 
 const Time = styled.div`
   font-size: 2em;
   font-weight: bold;
+  font-family: 'ZCOOL QingKe HuangYou', cursive;
   color: ${p => p.running || "ivory" };
   margin: auto;
   text-align: center;

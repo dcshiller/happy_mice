@@ -12,9 +12,9 @@ const StyledMouseBox = styled.div`
   grid-column-end: 4;
   grid-row-start: 4;
   grid-row-end: 4;
-  width: 100%;
+  width: calc(100% - 2em);
   padding: 1em;
-  min-height: 300px;
+  min-height: 12rem;
   background: ivory;
   align-items: flex-start;
   position: relative;

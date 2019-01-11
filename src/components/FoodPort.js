@@ -24,8 +24,6 @@ const HideOverflow = styled.div`
 `
 
 const FoodPyramid = styled.div`
-  background: yellow;
-  background-image: url(${grainImage});
   border: 2px solid tan;
   width: 1000px;
   height: 1000px;
@@ -40,7 +38,7 @@ const FoodPyramid = styled.div`
 
 const AddFoodButton = styled.button`
   background: ${p => p.disabled ? "lightgrey" : "radial-gradient(yellow, yellow, khaki)"};
-  border: 3px solid tan;
+  border: 3px solid ${p => p.disabled ? "darkgrey" : "tan"};
   font-weight: bold;
   font-size: 1.1em;
   color: black;
@@ -51,7 +49,7 @@ const AddFoodButton = styled.button`
   transform: translateX(-50%);
   z-index: 20;
   outline: none;
-  cursor: pointer;
+  cursor: ${p => p.disabled ? "not-allowed" : "pointer"};
 `;
 
 const FoodPort = (props) => {
@@ -63,8 +61,10 @@ const FoodPort = (props) => {
         </Container>
       </TabRow>
       <HideOverflow>
-      <AddFoodButton disabled={props.disabled} onClick={!props.disabled && props.addFood}>Feed Mice</AddFoodButton>
-      <FoodPyramid amount={props.food} />
+        <AddFoodButton disabled={props.disabled} onClick={!props.disabled && props.addFood}>Feed Mice</AddFoodButton>
+      <FoodPyramid style={{
+          backgroundImage: `url(${grainImage})`
+        }} amount={props.food} />
     </HideOverflow>
     </StyledFoodPort>
   )
