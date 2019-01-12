@@ -1,10 +1,11 @@
+import squeek1 from "../sounds/squeekA.wav";
+import squeek2 from "../sounds/squeekB.wav";
+import eat from "../sounds/eat.wav";
+
 let mouseCount = 0;
 
-
 const COLORS = ["peru", "saddlebrown", "sienna", "rgb(160,95,45)",
-"rgb(150,42,25)",
-"rgb(120,90,38)",
-"rgb(120,90,38)","rgb(150,100,47)","rgb(150,80,40)",
+"rgb(150,42,25)", "rgb(120,90,38)", "rgb(120,90,38)","rgb(150,100,47)","rgb(150,80,40)",
 ];
 
 const randomColor = () => COLORS[Math.floor(Math.random() * COLORS.length)];
@@ -27,7 +28,7 @@ export default class Mouse {
   feedFirst(food){
     if (food.amount === 0) {
       if (this.robustness < 3) { this.die(); }
-      if (this.robustness < 5) { this.utility--; }
+      this.utility--;
       this.robustness--;
       return;
     }
@@ -38,6 +39,10 @@ export default class Mouse {
   feedSecond(food){
     if (food.amount === 0) {
       return;
+    }
+    if (window.soundOn) {
+      const audio = new Audio(eat);
+      setTimeout(audio.play.bind(audio), Math.floor(Math.random() *1200));
     }
     this.robustness < 10 && this.robustness++;
     food.amount--;
@@ -59,6 +64,10 @@ export default class Mouse {
 
   die(oldage) {
     this.alive = false;
+    if (window.soundOn) {
+      const audio = new Audio(this.age < 3 ? squeek1 : squeek2);
+      setTimeout(audio.play.bind(audio), Math.floor(Math.random() * 800));
+    }
     if (!oldage) this.utility = this.utility - 10;
   }
 }

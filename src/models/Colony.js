@@ -56,7 +56,15 @@ export default class Colony {
     return dead(this.mice);
   }
 
-  orderedByUtility() {
-    return [...this.mice].sort((a, b) => (a.utility < b.utility) && -1);
+  utilities() {
+    return this.mice.map(a => a.utility);
+  }
+
+  distribution() {
+    return this.utilities().sort((a,b) => a - b);
+  }
+
+  averageAge() {
+    return Math.floor(this.mice.reduce((accum, m) => accum + m.age, 0) / this.mice.length);
   }
 }

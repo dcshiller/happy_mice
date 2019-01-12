@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import DistributionLine from "./DistributionLine";
+
 import { StyledSectionTitle, TabRow, Container } from "./StyledTitles";
 
 const CardBox = styled.div`
@@ -17,11 +19,14 @@ const CardBox = styled.div`
 
 const StatName = styled.span`
   font-weight: bold;
+  margin-right: .3em;
 `;
 
 const Stat = styled.div``;
 const SubStat = styled.div`
   margin-left: 1em;
+  display: flex;
+  align-items: center;
   ${SubStat} {
     font-size: .9em;
   }
@@ -40,11 +45,13 @@ const StatCard = (props) => {
       <SubStat><StatName>Total:</StatName> {game.utility()}</SubStat>
       <SubStat><StatName>Per Second:</StatName> {game.averageTimeUtility(props.time)}</SubStat>
       <SubStat><StatName>Per Mouse:</StatName> {game.averageMouseUtility()}</SubStat>
-      <SubStat><StatName>10, 50, 90%:</StatName> {game.medianMouseUtility(0.1)}, {game.medianMouseUtility(0.5)}, {game.medianMouseUtility(0.9)} </SubStat>
-      <br/>
+      <SubStat style={{marginTop: "-22px"}} ><StatName>Distribution:</StatName> <DistributionLine distribution={game.colony.distribution()}/> </SubStat>
+      <Stat><StatName>Food</StatName></Stat>
+      <SubStat><StatName>Total:</StatName> {game.food.amount}</SubStat>
+      <br />
       <Stat><StatName>Mice</StatName></Stat>
-      <SubStat><StatName>Alive:</StatName> {game.colony.livingMice().length}</SubStat>
-      <SubStat><StatName>Deceased:</StatName> {game.colony.deadMice().length}</SubStat>
+      <SubStat><StatName>Living:</StatName> {game.colony.livingMice().length} of {game.colony.mice.length}</SubStat>
+      <SubStat><StatName>Avg. Age:</StatName> {game.colony.averageAge()} Weeks</SubStat>
     </CardBox>
   );
 }
