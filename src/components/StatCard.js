@@ -36,7 +36,7 @@ const StatCard = (props) => {
           <StyledSectionTitle> Stats </StyledSectionTitle>
         </Container>
       </TabRow>
-      <Stat><StatName>Utility</StatName></Stat>
+      <Stat><StatName>Happiness</StatName></Stat>
       <SubStat><StatName>Total:</StatName> {game.utility()}</SubStat>
       <SubStat><StatName>Per Second:</StatName> {game.averageTimeUtility(props.time)}</SubStat>
       <SubStat><StatName>Per Mouse:</StatName> {game.averageMouseUtility()}</SubStat>

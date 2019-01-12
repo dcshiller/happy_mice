@@ -21,7 +21,7 @@ export default class Mouse {
 
   growOlder() {
     this.age++;
-    if (this.age > 52 && Math.random() > 0.98) this.die();
+    if (this.age > 52 && Math.random() > 0.98) this.die(true);
   }
 
   feedFirst(food){
@@ -57,8 +57,8 @@ export default class Mouse {
     return newMice;
   }
 
-  die() {
+  die(oldage) {
     this.alive = false;
-    this.utility = this.utility - 10;
+    if (!oldage) this.utility = this.utility - 10;
   }
 }

@@ -3,6 +3,9 @@ import Colony from "./Colony.js";
 export default class Game {
   constructor() {
     this.colony = new Colony();
+    this.colony.ageMice();
+    this.colony.ageMice();
+    this.colony.ageMice();
     this.food = { amount: 100 };
     this.addFood = () => this.food.amount = this.food.amount + 20;
   }
