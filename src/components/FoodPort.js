@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "styled-components";
-import grainImage from "../images/grain.jpg";
 import { StyledSectionTitle, TabRow, Container } from "./StyledTitles";
+import styled from "styled-components";
+const grainImage = "./images/grain.jpg";
 
 const StyledFoodPort = styled.div`
   border: 2px solid grey;

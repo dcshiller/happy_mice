@@ -1,6 +1,13 @@
-import squeek1 from "../sounds/squeekA.wav";
-import squeek2 from "../sounds/squeekB.wav";
-import eat from "../sounds/eat.wav";
+//import squeek1 from "../sounds/squeekA.wav";
+//import squeek2 from "../sounds/squeekB.wav";
+//import eat from "../sounds/eat.wav";
+
+import soundQueue from "../helpers/SoundQueue";
+
+
+const squeek1 = "./sounds/squeekA.wav";
+const squeek2 = "./sounds/squeekB.wav";
+const eat = "./sounds/eat.wav";
 
 let mouseCount = 0;
 
@@ -41,8 +48,7 @@ export default class Mouse {
       return;
     }
     if (window.soundOn) {
-      const audio = new Audio(eat);
-      setTimeout(audio.play.bind(audio), Math.floor(Math.random() *1200));
+      soundQueue.queue(eat);
     }
     this.robustness < 10 && this.robustness++;
     food.amount--;
@@ -65,8 +71,7 @@ export default class Mouse {
   die(oldage) {
     this.alive = false;
     if (window.soundOn) {
-      const audio = new Audio(this.age < 3 ? squeek1 : squeek2);
-      setTimeout(audio.play.bind(audio), Math.floor(Math.random() * 800));
+      soundQueue.queue(this.age < 3 ? squeek1 : squeek2);
     }
     if (!oldage) this.utility = this.utility - 10;
   }

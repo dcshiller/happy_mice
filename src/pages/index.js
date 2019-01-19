@@ -6,7 +6,7 @@ import Clock from "../components/Clock";
 import MouseBox from "../components/MouseBox";
 import FoodPort from "../components/FoodPort";
 import StatCard from "../components/StatCard";
-import mouseImage from "../images/mouse (copy).png";
+const mouseImage = "./images/mouse (copy).png";
 
 const SiteTitle = styled.h1`
   color: white;
@@ -151,17 +151,20 @@ export default class IndexPage extends React.Component {
     this.state = { time: 0, paused: true, modal: true };
     this.game = new Game();
     clock.onTick(this.advance.bind(this));
-    document.addEventListener("keyup", (e) => {
+    this.pause = () => { this.setState({paused: true }); };
+    this.unpause = () => { this.setState({paused: false }); };
+    this.hideModal = () => { clock.start(); this.setState({ paused: false, modal: false})};
+    this.showModal = () => { clock.stop(); this.setState({ paused: true, modal: true})};
+    this.toggleSound = () => { if (typeof window !== "undefined") window.soundOn = !window.soundOn; this.forceUpdate()};
+  }
+
+  componentDidMount() {
+    window.addEventListener("keyup", (e) => {
       if (e.keyCode == 32){
         if (this.state.paused) { clock.start(); this.setState({ paused: false }); }
         else { clock.stop(); this.setState({ paused: true }); }
       }
     });
-    this.pause = () => { this.setState({paused: true }); };
-    this.unpause = () => { this.setState({paused: false }); };
-    this.hideModal = () => { clock.start(); this.setState({ paused: false, modal: false})};
-    this.showModal = () => { clock.stop(); this.setState({ paused: true, modal: true})};
-    this.toggleSound = () => { window.soundOn = !window.soundOn; this.forceUpdate()};
   }
 
   render() {
@@ -219,7 +222,7 @@ export default class IndexPage extends React.Component {
           <p> The mouse artwork for this game was uploaded to the Open Clip Art Library by  <a href="https://openclipart.org/user-detail/artbejo" target="_blank">artbejo</a>.</p>
           <p> Sounds for this game were uploaded to Freesound by <a href="https://freesound.org/people/Reitanna/" target="_blank">Reitanna</a> and <a href="https://freesound.org/people/Jon285/" target="_blank">Jon285</a>.</p>
           <p> This game uses Coiny and ZCool QingKe HuangYou from Google Fonts. </p>
-          <p> This game was written in JavaScript using React and Gatsby. Code for the game available on <a href="https://github.com/dcshiller/happy_mice" target="_blank">Github</a>.</p>
+          <p> This game was written in JavaScript using React. Code for the game available on <a href="https://github.com/dcshiller/happy_mice" target="_blank">Github</a>.</p>
           <br />
           <br />
           <em>For Oates</em>
@@ -233,7 +236,7 @@ export default class IndexPage extends React.Component {
         <MenuBar>
           <ResetButton over={this.game.colony.livingMice().length === 0} onClick={this.reset.bind(this)}> reset</ResetButton>
           <MenuButton over={this.game.colony.livingMice().length === 0} onClick={this.showModal}> about </MenuButton>
-          <MenuButton over={this.game.colony.livingMice().length === 0} onClick={this.toggleSound}> sound: {window.soundOn ? "on" : "off"} </MenuButton>
+          <MenuButton over={this.game.colony.livingMice().length === 0} onClick={this.toggleSound}> sound: {typeof window !== "undefined" && window.soundOn ? "on" : "off"} </MenuButton>
         </MenuBar>
         </SiteTitle>
         <StatCard game={this.game} time={clock.time} />

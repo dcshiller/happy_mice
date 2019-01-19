@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import mouseImage from "../images/mouse.png";
-import deadMouseImage from "../images/deadmouse.png";
+const mouseImage = "./images/mouse.png";
+const deadMouseImage = "./images/deadmouse.png";
 
 const CardBox = styled.div`
   border: 2px solid darkgrey;
